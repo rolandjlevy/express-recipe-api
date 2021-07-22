@@ -39,11 +39,11 @@ const renderContent = ({ title, summary, instructions, image, sourceUrl }) => {
 app.get('/', (req, res) => {
   getRandomRecipe()
   .then(data => {
-    console.log({ data });
+    // console.log({ data });
     res.render('index', { recipe: data.recipes[0]});
   })
   .catch(err => {
-    console.log({ err });
+    // console.log({ err });
     res.send(`
       <h1>Error</h1>
       <p>${err.message}</p>
