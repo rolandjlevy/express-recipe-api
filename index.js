@@ -15,16 +15,35 @@ const baseUrl = 'https://api.spoonacular.com/recipes/random';
 const query = `?apiKey=${apiKey}&number=1&tags=vegetarian,dessert`;
 
 const getRandomRecipe = () => {
-  return new Promise((resolve, reject) => {
-    fetch(baseUrl + query)
-    .then(res => res.json())
-    .then(data => resolve(data))
-    .catch(err => reject(err))
-  })
-}
+	return new Promise((resolve, reject) => {
+		fetch(baseUrl + query)
+			.then(res => res.json())
+			.then(data => resolve(data))
+			.catch(err => reject(err));
+	});
+};
+
+app.get('/', (req, res) => {
+	getRandomRecipe()
+		.then(data => {
+			// console.log({ data });
+			res.render('index', { recipe: data.recipes[0] });
+		})
+		.catch(err => {
+			// console.log({ err });
+			res.send(`
+      <h1>An error occured</h1>
+      <p>${err.message}</p>
+    `);
+		});
+});
+
+app.listen(port, () => {
+	console.log('Listening on port', port);
+});
 
 const renderContent = ({ title, summary, instructions, image, sourceUrl }) => {
-  return `
+	return `
     <a href="/">New random recipe ⟳</a>
     <h1>${title}</h1>
     <h3>Summary</h3>
@@ -34,23 +53,4 @@ const renderContent = ({ title, summary, instructions, image, sourceUrl }) => {
     <p>${instructions}</p>
     <p><img src="${image}" ></p>
   `;
-}
-
-app.get('/', (req, res) => {
-  getRandomRecipe()
-  .then(data => {
-    // console.log({ data });
-    res.render('index', { recipe: data.recipes[0]});
-  })
-  .catch(err => {
-    // console.log({ err });
-    res.send(`
-      <h1>Error</h1>
-      <p>${err.message}</p>
-    `);
-  })
-});
-
-app.listen(port, () => {
-  console.log('Listening on port', port);
-})
+};

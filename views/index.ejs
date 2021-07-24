@@ -32,15 +32,18 @@
           <h1 class="display-5 fw-bold"><%= recipe.title %></h1>
 
           <p class="col-md-8 fs-4 p-0 mt-3">
-            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseSummary" role="button" aria-expanded="false" aria-controls="collapseSummary">
               Show summary
             </a>
           </p>
 
           <p class="col-md-8 fs-4">
-            <div class="collapse" id="collapseExample">
+            <div class="collapse" id="collapseSummary">
               <%- recipe.summary %>
             </div>
+          </p>
+
+          <p class="col-md-8 fs-4">
           </p>
 
         </div>
@@ -48,16 +51,21 @@
 
       <div class="row align-items-md-stretch">
         <div class="col-md-6">
-          <div class="h-100 p-5 text-white bg-dark rounded-3">
-            <h2>Change the background</h2>
-            <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>
+          <div class="h-100 p-5 bg-light rounded-3">
+            <img src="<%= recipe.image %>" style="width:100%"/>
+            <h2>Instructions</h2> 
+            <a class="btn btn-outline-light" data-toggle="collapse" href="#collapseInstructions" role="button" aria-expanded="false" aria-controls="collapseInstructions">
+              Show instructions
+            </a>
+            <div class="collapse" id="collapseInstructions">
+              <%- recipe.instructions %>
+            </div>
             <button class="btn btn-outline-light" type="button">Example button</button>
           </div>
         </div>
         <div class="col-md-6">
-          <div class="h-100 p-5 bg-light border rounded-3">
+          <div class="h-100 p-5 bg-light rounded-3">
             <h2>Add borders</h2>
-            <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>
             <button class="btn btn-outline-secondary" type="button">Example button</button>
           </div>
         </div>
